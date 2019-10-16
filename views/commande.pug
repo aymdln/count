@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  div(class="input")
+    form(class="init" action="#")
+      div
+        label(for="init") Initialisation:
+        input(name="init" value= "150000")
+      button(type="submit") INITIALISER
+    form(class="order" action="")
+      div
+        label(for="order") commande:
+        input(name="order")
+      button(type="submit") ENVOYER
+
+block script
+  script(src="./javascripts/socket.js")
