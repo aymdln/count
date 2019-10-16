@@ -4,14 +4,16 @@ let init = document.querySelector(".init")
 let order = document.querySelector(".order")
 
 init.addEventListener('submit', (event) => {
-  let value = event.srcElement[0].value;
+  event.preventDefault()
+  let value = event.srcElement[0].value.replace(/\s+/g, '');
   let data = { init: true, value: value }
   console.log(data)
   socket.emit('count', data );
 })
 
 order.addEventListener('submit', (event) => {
-  let value = event.srcElement[0].value;
+  event.preventDefault()
+  let value = event.srcElement[0].value.replace(/\s+/g, '');
   let data = { init: false, value: value }
   console.log(data)
   socket.emit('count', data );

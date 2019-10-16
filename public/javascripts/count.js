@@ -19,6 +19,6 @@ socket.on('data', function (data) {
 
 window.addEventListener("DOMContentLoaded", (event) => {
   setTimeout(() => {
-    odometer.update(150000)
+    socket.emit('start')
   }, 800);
 });
