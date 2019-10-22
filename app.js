@@ -1,3 +1,4 @@
+require('dotenv').config()
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -6,6 +7,8 @@ var logger = require('morgan');
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var fs = require('fs');
+var cron = require('node-cron');
+var fetch = require('node-fetch');
 
 
 var indexRouter = require('./routes/index');
@@ -85,5 +88,40 @@ const writeDb = (data) => {
     }
   });
 }
+
+cron.schedule('50 45 16 * * 1-5', () => {
+  fs.readFile('./public/db.json', 'utf8', function readFileCallback(err, dataDb) {
+    if (err) {
+      console.log(err);
+    } else {
+      obj = JSON.parse(dataDb);
+
+
+      const body = {
+        "blocks": [
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": `Hello <!channel>
+              
+              Rappel de l'objectif de la semaine :dart:: *${parseFloat(obj.value).toLocaleString('fr')} €* :moneybag:
+      
+              Bonne Journée à vous !`
+            }
+          }
+        ]
+      };
+
+      fetch(process.env.SLACK_URL, {
+        method: 'post',
+        body: JSON.stringify(body),
+        headers: { 'Content-Type': 'application/json' },
+      })
+        .then(json => console.log(json));
+
+    }
+  })
+});
 
 module.exports = app;
