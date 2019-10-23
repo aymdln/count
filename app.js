@@ -96,6 +96,8 @@ cron.schedule(' 00 09 * * 1-5', () => {
     } else {
       obj = JSON.parse(dataDb);
 
+      number = parseFloat(obj.value).toLocaleString('fr')
+      number = number.replace(',', ' ')
 
       const body = {
         "blocks": [
@@ -105,7 +107,7 @@ cron.schedule(' 00 09 * * 1-5', () => {
               "type": "mrkdwn",
               "text": `Hello <!channel>
               
-              Rappel de l'objectif de la semaine :dart:: *${parseFloat(obj.value).toLocaleString('fr')} €* :moneybag:
+              Rappel de l'objectif de la semaine :dart:: *${number} €* :moneybag:
       
               Bonne Journée à vous !`
             }
