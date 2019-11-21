@@ -89,7 +89,7 @@ const writeDb = (data) => {
   });
 }
 
-cron.schedule(' 00 09 * * 1-5', () => {
+cron.schedule(' 30 08 * * 1-5', () => {
   fs.readFile('./public/db.json', 'utf8', function readFileCallback(err, dataDb) {
     if (err) {
       console.log(err);
