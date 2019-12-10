@@ -89,41 +89,4 @@ const writeDb = (data) => {
   });
 }
 
-// cron.schedule(' 09 11 * * 1-5', () => {
-//   fs.readFile('./public/db.json', 'utf8', function readFileCallback(err, dataDb) {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       obj = JSON.parse(dataDb);
-
-//       number = parseFloat(obj.value).toLocaleString('fr')
-//       number = number.replace(',', ' ')
-
-//       const body = {
-//         "blocks": [
-//           {
-//             "type": "section",
-//             "text": {
-//               "type": "mrkdwn",
-//               "text": `Hello <!channel>
-              
-//               Rappel de l'objectif de la semaine :dart:: *${number} €* :moneybag:
-      
-//               Bonne Journée à vous !`
-//             }
-//           }
-//         ]
-//       };
-
-//       fetch(process.env.SLACK_URL, {
-//         method: 'post',
-//         body: JSON.stringify(body),
-//         headers: { 'Content-Type': 'application/json' },
-//       })
-//         .then(json => console.log(json));
-
-//     }
-//   })
-// });
-
 module.exports = app;
